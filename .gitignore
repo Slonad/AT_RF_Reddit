@@ -1,8 +1,8 @@
 /.pytest_cache/
 /venv/
 /.idea/
+/__pycache__/
 log.html
 output.xml
 pytest.ini
 report.html
-req.txt
