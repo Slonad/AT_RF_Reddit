@@ -1,9 +1,5 @@
 /.pytest_cache/
 /venv/
+/.idea/
 log.html
-.idea
-output.xml
-pytest.ini
-report.html
-req.txt
-/library/
+somefile
