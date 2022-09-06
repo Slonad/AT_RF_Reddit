@@ -2,4 +2,7 @@
 /venv/
 /.idea/
 log.html
-somefile
+output.xml
+pytest.ini
+report.html
+req.txt
