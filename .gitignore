@@ -6,3 +6,4 @@ log.html
 output.xml
 pytest.ini
 report.html
+/variables/sensitive_data.py
