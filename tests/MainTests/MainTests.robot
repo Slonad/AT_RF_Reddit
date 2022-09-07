@@ -3,12 +3,12 @@ Resource          suite.resource
 Force Tags        api:online
 
 *** Variables ***
-${SUBREDDIT_NAME_ONE}=  technologi
+${SUBREDDIT_NAME_ONE}=  technology
 ${SUBREDDIT_NAME_TWO}=  dadjokes
-${THREAD_FULLNAME}=     t3_x6clh6
-${QUERY}=   Inside some
+${THREAD_FULLNAME}=     t3_x7ztyf
+${QUERY}=       Inside some
 ${MESSAGE}=     Some message
-${TITLE}=     Some post
+${TITLE}=       Some post
 
 *** Test Cases ***
 Test Search Thread Comment Delete Comment by Title
@@ -18,13 +18,15 @@ Test Search Thread Comment Delete Comment by Title
     ${response}=    SubredditsApi.search_thread     subreddit_name=${SUBREDDIT_NAME_ONE}
                     ...                             query=${QUERY}
     Should be equal     ${response.status_code}     ${200}
+
     ${thread_fullname}=     Tools.get_not_archived_thread   ${response}
     ${response}=    LinksCommentsApi.post_comment   thread_id=${thread_fullname}
                     ...                             message=${MESSAGE}
     Should be equal     ${response.status_code}     ${200}
-    ${response}=    LinksCommentsApi.delete_t_entity     reddit_fullname=${response.json()['jquery'][18][3][0][0]['data']['name']}
-    Should be equal     ${response.status_code}     ${200}
 
+    ${reddit_fullname}=     Set Variable     ${response.json()['jquery'][18][3][0][0]['data']['name']}
+    ${response}=    LinksCommentsApi.delete_t_entity     reddit_fullname=${reddit_fullname}
+    Should be equal     ${response.status_code}     ${200}
 
 Test Search Thread Comment Delete Comment by Key
     [Documentation]    Поиск треда по ключу. комментирование и удаление коммента
@@ -34,7 +36,7 @@ Test Search Thread Comment Delete Comment by Key
                     ...                             message=${MESSAGE}
     Should be equal     ${response.status_code}     ${200}
 
-    ${reddit_fullname}=     ${response.json()['jquery'][18][3][0][0]['data']['name']}
+    ${reddit_fullname}=     Set Variable    ${response.json()['jquery'][18][3][0][0]['data']['name']}
     ${response}=    LinksCommentsApi.delete_t_entity     reddit_fullname=${reddit_fullname}
     Should be equal     ${response.status_code}     ${200}
 
