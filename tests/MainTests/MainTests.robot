@@ -58,6 +58,7 @@ Test Subscribe and Post
 
 *** Keywords ***
 Delete Post
+    [Documentation]     KW удаления поста
     [Arguments]    ${response}
 
     ${fullname_post}=   Tools.get_fullname_post     response=${response}
